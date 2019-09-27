@@ -1,6 +1,6 @@
 {
   "name": "@alanchenchen/express-decorator",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "some decorators for express application",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",

@@ -145,7 +145,8 @@ const MethodsGenerate = (): any => {
                         inject && inject.forEach((classModule: any) => {
                             classModule.injected = req;
                         });
-                        descriptor.value(req, res, next);
+                         // must fix the this point to target class prototype!!
+                        descriptor.value.call(target, req, res, next);
                     }
                     target.Instance[method](path, handler);
                 })
@@ -167,7 +168,8 @@ export const Redirect = (from: string = "/", to: string = "/", method: string = 
     return generateDecorator((options: any[], name: string, descriptor: any) => {
         options.push((target: any) => {
             target.Instance[method](pathFix(from), (req: any, res: any) => {
-                descriptor.value();
+                 // must fix the this point to target class prototype!!
+                descriptor.value.call(target);
                 res.redirect(statusCode, to);
             });
         });
